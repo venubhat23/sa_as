@@ -12,5 +12,10 @@ test:
   url: <%= ENV.fetch("DATABASE_URL_TEST", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>
 
 production:
-  <<: *default
-  url: <%= ENV.fetch("DATABASE_URL", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>
+  cable:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>
+    migrations_paths: db/cable_migrate
