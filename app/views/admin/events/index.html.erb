@@ -1,0 +1,75 @@
+<% page_title "Events" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Event Management</h2>
+    <p class="text-muted mb-0">Manage your events here</p>
+  </div>
+  <div>
+    <%= link_to new_admin_event_path, class: "btn btn-primary" do %>
+      <i class="bi bi-plus-lg me-1"></i> Add New Event
+    <% end %>
+  </div>
+</div>
+
+<!-- Table Card -->
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Event List</h5>
+  </div>
+  <div class="card-body p-0">
+    <% if @events.any? %>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="border-0 fw-semibold">Title</th>
+              <th class="border-0 fw-semibold">Type</th>
+              <th class="border-0 fw-semibold">Start</th>
+              <th class="border-0 fw-semibold">Venue</th>
+              <th class="border-0 fw-semibold">Fee</th>
+              <th class="border-0 fw-semibold">Status</th>
+              <th class="border-0 fw-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @events.each do |f| %>
+              <tr>
+                <td class="align-middle"><%= f.title %></td>
+                <td class="align-middle"><%= f.event_type %></td>
+                <td class="align-middle"><%= f.start_date&.strftime('%d %b %Y') %></td>
+                <td class="align-middle"><%= f.venue %></td>
+                <td class="align-middle"><%= inr(f.registration_fee) %></td>
+                <td class="align-middle"><%= status_badge(f.status) %></td>
+                <td class="align-middle">
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to admin_event_path(f), class: "dropdown-item" do %><i class="bi bi-eye me-2"></i>View<% end %></li>
+                      <li><%= link_to edit_admin_event_path(f), class: "dropdown-item" do %><i class="bi bi-pencil me-2"></i>Edit<% end %></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= link_to admin_event_path(f), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "dropdown-item text-danger" do %><i class="bi bi-trash me-2"></i>Delete<% end %></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-transparent border-0">
+        <%= paginate @events if @events.respond_to?(:current_page) %>
+      </div>
+    <% else %>
+      <div class="text-center py-5">
+        <i class="bi bi-calendar-event-fill fs-1 text-muted mb-3 d-block"></i>
+        <h5 class="text-muted mb-3">No Events Found</h5>
+        <p class="text-muted mb-4">Get started by adding your first event.</p>
+        <%= link_to "Add Event", new_admin_event_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

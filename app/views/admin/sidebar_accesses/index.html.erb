@@ -1,0 +1,67 @@
+<% page_title "Sidebar Access" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Sidebar Access Control</h2>
+    <p class="text-muted mb-0">Manage menu visibility per role</p>
+  </div>
+</div>
+
+<!-- Role Select Card -->
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-body">
+    <label class="form-label fw-semibold">Select Role</label>
+    <select id="roleSelect" class="form-select" style="max-width:300px;">
+      <% @roles.each do |role| %><option value="<%= role.id %>"><%= role.name %></option><% end %>
+    </select>
+  </div>
+</div>
+
+<!-- Access Toggles Card -->
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Menu Access</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <% @menu_keys.each do |key| %>
+        <div class="col-md-4 mb-2">
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input menu-toggle" data-menu="<%= key %>" id="menu_<%= key %>">
+            <label class="form-check-label" for="menu_<%= key %>"><%= key.titleize %></label>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const accessData = <%= raw @accesses.map { |k, v| [k.join("|"), v.is_enabled] }.to_h.to_json %>;
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
+
+    function loadRole(roleId) {
+      document.querySelectorAll('.menu-toggle').forEach(cb => {
+        const key = roleId + "|" + cb.dataset.menu;
+        cb.checked = accessData[key] === undefined ? false : !!accessData[key];
+      });
+    }
+
+    document.addEventListener('change', function(e) {
+      if (!e.target.classList.contains('menu-toggle')) return;
+      const roleId = document.getElementById('roleSelect').value;
+      const menu = e.target.dataset.menu;
+      const enabled = e.target.checked;
+      fetch(`/admin/sidebar_accesses/${roleId}.json`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        body: JSON.stringify({ menu_key: menu, is_enabled: ''+enabled })
+      }).then(() => { accessData[roleId + "|" + menu] = enabled; });
+    });
+
+    const sel = document.getElementById('roleSelect');
+    if (sel) { sel.addEventListener('change', () => loadRole(sel.value)); loadRole(sel.value); }
+  })();
+</script>

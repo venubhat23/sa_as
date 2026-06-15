@@ -1,0 +1,46 @@
+<%= form_with model: [:admin, @one_to_one], local: true do |form| %>
+  <% if @one_to_one.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@one_to_one.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @one_to_one.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :member1_id, "Member 1", class: "form-label" %>
+      <%= form.collection_select :member1_id, Member.all, :id, :full_name, { include_blank: "Select Member 1" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :member2_id, "Member 2", class: "form-label" %>
+      <%= form.collection_select :member2_id, Member.all, :id, :full_name, { include_blank: "Select Member 2" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :meeting_date, "Meeting Date", class: "form-label" %>
+      <%= form.date_field :meeting_date, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :location, "Location", class: "form-label" %>
+      <%= form.text_field :location, class: "form-control" %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :agenda, "Agenda", class: "form-label" %>
+      <%= form.text_area :agenda, class: "form-control", rows: 3 %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :discussion_notes, "Discussion Notes", class: "form-label" %>
+      <%= form.text_area :discussion_notes, class: "form-control", rows: 3 %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :action_items, "Action Items", class: "form-label" %>
+      <%= form.text_area :action_items, class: "form-control", rows: 3 %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :status, "Status", class: "form-label" %>
+      <%= form.select :status, ["scheduled", "completed", "cancelled"], { include_blank: "Select" }, class: "form-select" %>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_one_to_ones_path, class: "btn btn-light" %>
+  </div>
+<% end %>

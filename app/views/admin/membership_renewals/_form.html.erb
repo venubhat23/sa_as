@@ -1,0 +1,42 @@
+<%= form_with model: [:admin, @membership_renewal], local: true do |form| %>
+  <% if @membership_renewal.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@membership_renewal.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @membership_renewal.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :member_id, "Member", class: "form-label" %>
+      <%= form.collection_select :member_id, Member.all, :id, :full_name, { include_blank: "Select Member" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :plan_id, "Plan", class: "form-label" %>
+      <%= form.collection_select :plan_id, MembershipPlan.all, :id, :name, { include_blank: "Select Plan" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :renewal_date, "Renewal Date", class: "form-label" %>
+      <%= form.date_field :renewal_date, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :expiry_date, "Expiry Date", class: "form-label" %>
+      <%= form.date_field :expiry_date, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :amount, "Amount", class: "form-label" %>
+      <%= form.number_field :amount, step: :any, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :payment_status, "Payment Status", class: "form-label" %>
+      <%= form.select :payment_status, ["pending", "paid"], { include_blank: "Select" }, class: "form-select" %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :notes, "Notes", class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control", rows: 3 %>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_membership_renewals_path, class: "btn btn-light" %>
+  </div>
+<% end %>

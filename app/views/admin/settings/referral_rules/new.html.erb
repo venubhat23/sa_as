@@ -1,0 +1,20 @@
+<% page_title "New Referral Rule" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">New Referral Rule</h2>
+    <p class="text-muted mb-0">Fill in the details below</p>
+  </div>
+  <%= link_to admin_settings_referral_rules_path, class: "btn btn-outline-secondary" do %>
+    <i class="bi bi-arrow-left me-1"></i>Back
+  <% end %>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Referral Rule Details</h5>
+  </div>
+  <div class="card-body">
+    <%= render "form" %>
+  </div>
+</div>

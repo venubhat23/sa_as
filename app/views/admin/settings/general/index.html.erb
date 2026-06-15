@@ -1,0 +1,30 @@
+<% page_title "General Settings" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">General Settings</h2>
+    <p class="text-muted mb-0">Configure your organization settings</p>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Organization Settings</h5>
+  </div>
+  <div class="card-body">
+    <%= form_with url: admin_settings_general_path, method: :patch, local: true do %>
+      <% defaults = { "organization_name" => "Organization Name", "contact_email" => "Contact Email", "contact_phone" => "Contact Phone", "address" => "Address", "currency" => "Currency", "timezone" => "Timezone" } %>
+      <% existing = GeneralSetting.all.index_by(&:key) %>
+      <div class="row">
+        <% defaults.each do |key, label| %>
+          <div class="col-md-6 mb-3">
+            <label class="form-label fw-semibold"><%= label %></label>
+            <input type="text" name="settings[<%= key %>]" value="<%= existing[key]&.value %>" class="form-control">
+          </div>
+        <% end %>
+      </div>
+      <%= submit_tag "Save Settings", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

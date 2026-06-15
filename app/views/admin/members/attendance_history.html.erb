@@ -1,0 +1,6 @@
+<% page_title "Attendance History" %>
+<div class="page-header"><h1><i class="bi bi-calendar-check me-2"></i>Attendance History - <%= @member.full_name %></h1><%= link_to "Back", admin_member_path(@member), class: "btn btn-light" %></div>
+<div class="card"><div class="card-body p-0"><table class="table mb-0"><thead><tr><th>Meeting Date</th><th>Type</th><th>Status</th><th>Check-in</th></tr></thead><tbody>
+  <% @attendances.each do |a| %><tr><td><%= a.weekly_meeting&.meeting_date %></td><td><%= a.weekly_meeting&.meeting_type %></td><td><%= status_badge(a.attendance_status) %></td><td><%= a.check_in_time&.strftime("%H:%M") %></td></tr><% end %>
+  <% if @attendances.empty? %><tr><td colspan="4" class="text-muted p-3">No records.</td></tr><% end %>
+</tbody></table></div></div>

@@ -1,0 +1,10 @@
+<% page_title "Referral Pipeline" %>
+<div class="page-header"><h1><i class="bi bi-kanban me-2"></i>Referral Pipeline</h1><%= link_to "Back", admin_referrals_path, class: "btn btn-light" %></div>
+<div class="row g-3">
+  <% Referral.workflow_statuses.keys.each do |st| %>
+    <div class="col"><div class="card text-center"><div class="card-body">
+      <div class="stat-value text-primary"><%= @pipeline[Referral.workflow_statuses[st]] || 0 %></div>
+      <div class="stat-label text-muted"><%= st.titleize %></div>
+    </div></div></div>
+  <% end %>
+</div>

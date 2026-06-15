@@ -1,0 +1,166 @@
+<% page_title "Members" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Member Management</h2>
+    <p class="text-muted mb-0">Manage your members here</p>
+  </div>
+  <div>
+    <%= link_to new_admin_member_path, class: "btn btn-primary" do %>
+      <i class="bi bi-plus-lg me-1"></i> Add New Member
+    <% end %>
+  </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h6 class="text-muted mb-1">Total Members</h6>
+            <h4 class="mb-0"><%= @total_count %></h4>
+          </div>
+          <div class="text-primary"><i class="bi bi-people-fill fs-2"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h6 class="text-muted mb-1">Active</h6>
+            <h4 class="mb-0"><%= @active_count %></h4>
+          </div>
+          <div class="text-success"><i class="bi bi-person-check-fill fs-2"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h6 class="text-muted mb-1">Expired</h6>
+            <h4 class="mb-0"><%= @expired_count %></h4>
+          </div>
+          <div class="text-danger"><i class="bi bi-person-x-fill fs-2"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1">
+            <h6 class="text-muted mb-1">Pending</h6>
+            <h4 class="mb-0"><%= @pending_count %></h4>
+          </div>
+          <div class="text-warning"><i class="bi bi-hourglass-split fs-2"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Card -->
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-body">
+    <%= form_with url: admin_members_path, method: :get, local: true do |f| %>
+      <div class="row g-2 align-items-end">
+        <div class="col-md-3">
+          <%= f.label :chapter_id, "Chapter", class: "form-label" %>
+          <%= f.collection_select :chapter_id, @chapters, :id, :name, { include_blank: "All Chapters", selected: params[:chapter_id] }, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :business_category_id, "Category", class: "form-label" %>
+          <%= f.collection_select :business_category_id, @categories, :id, :name, { include_blank: "All Categories", selected: params[:business_category_id] }, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :membership_status, "Status", class: "form-label" %>
+          <%= f.select :membership_status, Member.membership_statuses.keys, { include_blank: "All Statuses", selected: params[:membership_status] }, class: "form-select" %>
+        </div>
+        <div class="col-md-3">
+          <%= f.submit "Filter", class: "btn btn-primary" %>
+          <%= link_to "Reset", admin_members_path, class: "btn btn-outline-secondary ms-1" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Table Card -->
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Member List</h5>
+  </div>
+  <div class="card-body p-0">
+    <% if @members.any? %>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="border-0 fw-semibold">Photo</th>
+              <th class="border-0 fw-semibold">Name</th>
+              <th class="border-0 fw-semibold">Chapter</th>
+              <th class="border-0 fw-semibold">Category</th>
+              <th class="border-0 fw-semibold">Status</th>
+              <th class="border-0 fw-semibold">Phone</th>
+              <th class="border-0 fw-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @members.each do |m| %>
+              <tr>
+                <td class="align-middle">
+                  <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;">
+                    <%= m.first_name.to_s[0]&.upcase %>
+                  </div>
+                </td>
+                <td class="align-middle">
+                  <%= link_to m.full_name, admin_member_path(m), class: "fw-medium text-decoration-none" %>
+                  <div class="small text-muted"><%= m.company_name %></div>
+                </td>
+                <td class="align-middle"><%= m.chapter&.name %></td>
+                <td class="align-middle"><%= m.business_category&.name %></td>
+                <td class="align-middle"><%= status_badge(m.membership_status) %></td>
+                <td class="align-middle"><%= m.phone %></td>
+                <td class="align-middle">
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to admin_member_path(m), class: "dropdown-item" do %><i class="bi bi-eye me-2"></i>View<% end %></li>
+                      <li><%= link_to edit_admin_member_path(m), class: "dropdown-item" do %><i class="bi bi-pencil me-2"></i>Edit<% end %></li>
+                      <li><%= link_to suspend_admin_member_path(m), data: { turbo_method: :patch, turbo_confirm: "Suspend this member?" }, class: "dropdown-item text-warning" do %><i class="bi bi-pause-circle me-2"></i>Suspend<% end %></li>
+                      <li><%= link_to renew_admin_member_path(m), data: { turbo_method: :patch }, class: "dropdown-item text-success" do %><i class="bi bi-arrow-repeat me-2"></i>Renew<% end %></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= link_to admin_member_path(m), data: { turbo_method: :delete, turbo_confirm: "Delete this member?" }, class: "dropdown-item text-danger" do %><i class="bi bi-trash me-2"></i>Delete<% end %></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-transparent border-0">
+        <%= paginate @members %>
+      </div>
+    <% else %>
+      <div class="text-center py-5">
+        <i class="bi bi-people-fill fs-1 text-muted mb-3 d-block"></i>
+        <h5 class="text-muted mb-3">No Members Found</h5>
+        <p class="text-muted mb-4">Get started by adding your first member.</p>
+        <%= link_to "Add Member", new_admin_member_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

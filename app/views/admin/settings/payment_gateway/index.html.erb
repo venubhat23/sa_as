@@ -1,0 +1,44 @@
+<% page_title "Payment Gateway" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Payment Gateway Settings</h2>
+    <p class="text-muted mb-0">Configure your payment gateway</p>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Gateway Configuration</h5>
+  </div>
+  <div class="card-body">
+    <%= form_with model: @gateway, url: admin_settings_payment_gateway_path, method: :patch, local: true do |form| %>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= form.label :gateway_name, class: "form-label fw-semibold" %>
+          <%= form.select :gateway_name, ["Razorpay", "Cashfree", "Stripe", "PayU"], { include_blank: "Select" }, class: "form-select" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :environment, class: "form-label fw-semibold" %>
+          <%= form.select :environment, %w[test production], {}, class: "form-select" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :api_key, "API Key", class: "form-label fw-semibold" %>
+          <%= form.text_field :api_key, class: "form-control" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= form.label :api_secret, "API Secret", class: "form-label fw-semibold" %>
+          <%= form.text_field :api_secret, class: "form-control" %>
+        </div>
+        <div class="col-md-12 mb-3">
+          <div class="form-check form-switch">
+            <%= form.check_box :is_active, class: "form-check-input" %>
+            <%= form.label :is_active, "Active", class: "form-check-label" %>
+          </div>
+        </div>
+      </div>
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

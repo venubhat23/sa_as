@@ -1,0 +1,760 @@
+<style>
+.modern-sidebar {
+  position: fixed !important;
+  top: 70px !important;
+  left: 0 !important;
+  width: 200px !important;
+  height: calc(100vh - 70px) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%) !important;
+  border-right: 2px solid #e2e8f0 !important;
+  z-index: 1040 !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.nav-link-modern {
+  display: flex !important;
+  align-items: center !important;
+  padding: 10px 16px !important;
+  margin: 4px 8px !important;
+  border-radius: 16px !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgba(248, 250, 252, 0.8) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
+
+.nav-link-modern::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 4px !important;
+  height: 100% !important;
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6) !important;
+  transform: scaleY(0) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.nav-link-modern:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%) !important;
+  color: #1e293b !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+.nav-link-modern:hover::before {
+  transform: scaleY(1) !important;
+}
+
+.nav-link-modern:hover .nav-text {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+.nav-link-modern.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+.nav-link-modern.active::before {
+  transform: scaleY(1) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.nav-link-modern.active .nav-text {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.nav-link-modern.active .icon-bg {
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
+}
+
+.nav-text {
+  color: #64748b !important;
+  font-weight: 500 !important;
+  margin-left: 12px !important;
+  font-size: 14px !important;
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-section-title {
+  color: #3b82f6 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  padding: 16px 20px 6px 20px !important;
+  margin-bottom: 8px !important;
+  position: relative !important;
+}
+
+.nav-section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 20px !important;
+  width: 60px !important;
+  height: 3px !important;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6) !important;
+  border-radius: 2px !important;
+}
+
+.icon-bg {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+}
+
+.icon-bg::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 1px !important;
+  border-radius: 9px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-link-modern:hover .icon-bg {
+  transform: scale(1.1) rotate(2deg) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+.nav-link-modern:hover .icon-bg::after {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.nav-link-modern.active .icon-bg {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.nav-link-modern.active .icon-bg::after {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Bright & Vibrant Gradient Backgrounds */
+.gradient-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+}
+.gradient-green {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
+}
+.gradient-purple {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4) !important;
+}
+.gradient-orange {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%) !important;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+}
+.gradient-violet {
+  background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%) !important;
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4) !important;
+}
+.gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4) !important;
+}
+.gradient-red {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%) !important;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4) !important;
+}
+.gradient-cyan {
+  background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%) !important;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4) !important;
+}
+.gradient-sky {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%) !important;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4) !important;
+}
+.gradient-yellow {
+  background: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%) !important;
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4) !important;
+}
+.gradient-teal {
+  background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%) !important;
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4) !important;
+}
+.gradient-indigo {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4) !important;
+}
+.gradient-amber {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%) !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
+}
+.gradient-lime {
+  background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%) !important;
+  box-shadow: 0 6px 20px rgba(132, 204, 22, 0.4) !important;
+}
+.gradient-pink {
+  background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%) !important;
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4) !important;
+}
+.gradient-rose {
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%) !important;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4) !important;
+}
+.gradient-gray {
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%) !important;
+  box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3) !important;
+}
+
+.sidebar-nav {
+  padding: 1rem 0 !important;
+  flex: 1 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.nav-section {
+  margin-bottom: 1.5rem !important;
+}
+
+.nav-menu {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.nav-item {
+  margin-bottom: 4px !important;
+}
+
+.sidebar-footer {
+  margin-top: auto !important;
+  padding: 1rem !important;
+  border-top: 1px solid #e2e8f0 !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  background: rgba(248, 250, 252, 0.8) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.sidebar-footer::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 20% !important;
+  width: 60% !important;
+  height: 2px !important;
+  background: linear-gradient(to right, transparent, #06b6d4, #8b5cf6, transparent) !important;
+}
+
+.logout-btn-modern {
+  display: flex !important;
+  align-items: center !important;
+  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  color: #f87171 !important;
+  text-decoration: none !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
+  background: rgba(248, 113, 113, 0.05) !important;
+  border: 1px solid rgba(248, 113, 113, 0.2) !important;
+}
+
+.logout-btn-modern:hover {
+  background: linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(251, 113, 133, 0.15)) !important;
+  color: #ef4444 !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 6px 20px rgba(248, 113, 113, 0.3) !important;
+}
+
+.logout-btn-modern .nav-text {
+  margin-left: 12px !important;
+  font-weight: 500 !important;
+  color: #f87171 !important;
+}
+
+.main-content {
+  margin-left: 200px !important;
+  margin-top: 70px !important;
+  padding: 0 !important;
+}
+
+.main-content .container-fluid {
+  padding: 1rem 0.5rem 1rem 0.5rem !important;
+}
+
+/* Dropdown and Submenu Styles */
+.dropdown-arrow {
+  transition: transform 0.3s ease !important;
+  font-size: 12px !important;
+  color: #64748b !important;
+}
+
+.dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(90deg) !important;
+  color: #3b82f6 !important;
+}
+
+.submenu {
+  margin-left: 1rem !important;
+  margin-top: 0.5rem !important;
+  border-left: 2px solid #e2e8f0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.submenu-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.submenu-link {
+  padding: 8px 16px !important;
+  margin: 2px 8px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 13px !important;
+  color: #64748b !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.submenu-link:hover {
+  background: rgba(59, 130, 246, 0.1) !important;
+  color: #3b82f6 !important;
+  transform: translateX(4px) !important;
+}
+
+.submenu-link.active {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #3b82f6 !important;
+  font-weight: 600 !important;
+}
+
+.submenu-bullet {
+  margin-right: 8px !important;
+  font-size: 16px !important;
+  color: #64748b !important;
+  transition: color 0.2s ease !important;
+}
+
+.submenu-link:hover .submenu-bullet,
+.submenu-link.active .submenu-bullet {
+  color: #3b82f6 !important;
+}
+
+.nav-icon-modern {
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-indicator {
+  width: 0 !important;
+  height: 0 !important;
+  border-radius: 0 !important;
+  transition: all 0.3s ease !important;
+  margin-left: auto !important;
+}
+
+.nav-link-modern.active .nav-indicator {
+  width: 3px !important;
+  height: 20px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 2px !important;
+}
+</style>
+
+<div class="modern-sidebar" id="sidebar">
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+
+    <!-- Main Menu -->
+    <div class="nav-section">
+      <div class="nav-section-title">Main Menu</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_dashboard_path, class: "nav-link-modern #{'active' if current_page?(admin_dashboard_path)}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-blue"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+            </div>
+            <span class="nav-text">Dashboard</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_calendar_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/calendar')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-cyan"><i class="bi bi-calendar3"></i></div>
+            </div>
+            <span class="nav-text">Calendar</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Organization -->
+    <div class="nav-section">
+      <div class="nav-section-title">Organization</div>
+      <ul class="nav-menu">
+        <li class="nav-item dropdown-menu-item">
+          <a href="#" class="nav-link-modern dropdown-toggle #{'active' if request.path.include?('/admin/forums') || request.path.include?('/admin/chapters') || request.path.include?('/admin/regions') || request.path.include?('/admin/locations')}" data-bs-toggle="collapse" data-bs-target="#orgSubmenu">
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-purple"><i class="bi bi-diagram-3-fill"></i></div>
+            </div>
+            <span class="nav-text">Organization</span>
+            <span class="dropdown-arrow ms-auto"><i class="bi bi-chevron-down"></i></span>
+          </a>
+          <div class="submenu collapse <%= 'show' if request.path.include?('/admin/forums') || request.path.include?('/admin/chapters') || request.path.include?('/admin/regions') || request.path.include?('/admin/locations') %>" id="orgSubmenu">
+            <ul class="submenu-list">
+              <li><%= link_to admin_forums_path, class: "submenu-link #{'active' if request.path.include?('/admin/forums')}" do %><span class="submenu-bullet">&bull;</span><span>Forums</span><% end %></li>
+              <li><%= link_to admin_chapters_path, class: "submenu-link #{'active' if request.path.include?('/admin/chapters')}" do %><span class="submenu-bullet">&bull;</span><span>Chapters</span><% end %></li>
+              <li><%= link_to admin_regions_path, class: "submenu-link #{'active' if request.path.include?('/admin/regions')}" do %><span class="submenu-bullet">&bull;</span><span>Regions</span><% end %></li>
+              <li><%= link_to admin_locations_path, class: "submenu-link #{'active' if request.path.include?('/admin/locations')}" do %><span class="submenu-bullet">&bull;</span><span>Locations</span><% end %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- User Management -->
+    <div class="nav-section">
+      <div class="nav-section-title">User Management</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_members_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/members')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-green"><i class="bi bi-people-fill"></i></div>
+            </div>
+            <span class="nav-text">Members</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_guests_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/guests')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-teal"><i class="bi bi-person-plus-fill"></i></div>
+            </div>
+            <span class="nav-text">Guests</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_users_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/users')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-cyan"><i class="bi bi-person-badge-fill"></i></div>
+            </div>
+            <span class="nav-text">User Accounts</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Roles & Permissions -->
+    <div class="nav-section">
+      <div class="nav-section-title">Roles &amp; Permissions</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_roles_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/roles')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-indigo"><i class="bi bi-shield-fill"></i></div>
+            </div>
+            <span class="nav-text">Roles</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_permissions_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/permissions')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-violet"><i class="bi bi-key-fill"></i></div>
+            </div>
+            <span class="nav-text">Permissions</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_sidebar_accesses_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/sidebar_accesses')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-purple"><i class="bi bi-layout-sidebar"></i></div>
+            </div>
+            <span class="nav-text">Sidebar Access</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Membership -->
+    <div class="nav-section">
+      <div class="nav-section-title">Membership</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_membership_plans_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/membership_plans')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-amber"><i class="bi bi-card-list"></i></div>
+            </div>
+            <span class="nav-text">Membership Plans</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_membership_renewals_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/membership_renewals')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-orange"><i class="bi bi-arrow-repeat"></i></div>
+            </div>
+            <span class="nav-text">Renewals</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_fee_collections_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/fee_collections')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-green"><i class="bi bi-cash-coin"></i></div>
+            </div>
+            <span class="nav-text">Fee Collection</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Attendance -->
+    <div class="nav-section">
+      <div class="nav-section-title">Attendance</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_weekly_meetings_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/weekly_meetings')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-blue"><i class="bi bi-calendar-check-fill"></i></div>
+            </div>
+            <span class="nav-text">Meetings</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Business Directory -->
+    <div class="nav-section">
+      <div class="nav-section-title">Business Directory</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_business_categories_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/business_categories')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-lime"><i class="bi bi-tags-fill"></i></div>
+            </div>
+            <span class="nav-text">Categories</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_business_specialties_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/business_specialties')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-emerald"><i class="bi bi-bookmark-star-fill"></i></div>
+            </div>
+            <span class="nav-text">Specialties</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Referrals -->
+    <div class="nav-section">
+      <div class="nav-section-title">Referrals</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_referrals_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/referrals')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-purple"><i class="bi bi-share-fill"></i></div>
+            </div>
+            <span class="nav-text">All Referrals</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_thank_you_slips_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/thank_you_slips')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-pink"><i class="bi bi-receipt-cutoff"></i></div>
+            </div>
+            <span class="nav-text">Thank You Slips</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Networking -->
+    <div class="nav-section">
+      <div class="nav-section-title">Networking</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_one_to_ones_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/one_to_ones')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-cyan"><i class="bi bi-people"></i></div>
+            </div>
+            <span class="nav-text">One-To-One</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_office_darshans_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/office_darshans')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-blue"><i class="bi bi-building-fill-check"></i></div>
+            </div>
+            <span class="nav-text">Office Darshan</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Events -->
+    <div class="nav-section">
+      <div class="nav-section-title">Events</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_events_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/events')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-rose"><i class="bi bi-calendar-event-fill"></i></div>
+            </div>
+            <span class="nav-text">Events</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Committee -->
+    <div class="nav-section">
+      <div class="nav-section-title">Committee</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_committee_roles_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/committee_roles')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-amber"><i class="bi bi-star-fill"></i></div>
+            </div>
+            <span class="nav-text">Committee Roles</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_committee_assignments_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/committee_assignments')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-orange"><i class="bi bi-person-check-fill"></i></div>
+            </div>
+            <span class="nav-text">Assignments</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Communication -->
+    <div class="nav-section">
+      <div class="nav-section-title">Communication</div>
+      <ul class="nav-menu">
+        <li class="nav-item dropdown-menu-item">
+          <a href="#" class="nav-link-modern dropdown-toggle #{'active' if request.path.include?('templates')}" data-bs-toggle="collapse" data-bs-target="#commSubmenu">
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-teal"><i class="bi bi-chat-dots-fill"></i></div>
+            </div>
+            <span class="nav-text">Templates</span>
+            <span class="dropdown-arrow ms-auto"><i class="bi bi-chevron-down"></i></span>
+          </a>
+          <div class="submenu collapse <%= 'show' if request.path.include?('templates') %>" id="commSubmenu">
+            <ul class="submenu-list">
+              <li><%= link_to admin_email_templates_path, class: "submenu-link #{'active' if request.path.include?('/admin/email_templates')}" do %><span class="submenu-bullet">&bull;</span><span>Email</span><% end %></li>
+              <li><%= link_to admin_sms_templates_path, class: "submenu-link #{'active' if request.path.include?('/admin/sms_templates')}" do %><span class="submenu-bullet">&bull;</span><span>SMS</span><% end %></li>
+              <li><%= link_to admin_whatsapp_templates_path, class: "submenu-link #{'active' if request.path.include?('/admin/whatsapp_templates')}" do %><span class="submenu-bullet">&bull;</span><span>WhatsApp</span><% end %></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <%= link_to admin_notifications_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/notifications')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-yellow"><i class="bi bi-bell-fill"></i></div>
+            </div>
+            <span class="nav-text">Notifications</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Reports -->
+    <div class="nav-section">
+      <div class="nav-section-title">Reports</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <%= link_to admin_reports_path, class: "nav-link-modern #{'active' if request.path.include?('/admin/reports')}" do %>
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-indigo"><i class="bi bi-graph-up-arrow"></i></div>
+            </div>
+            <span class="nav-text">Reports &amp; Analytics</span>
+            <div class="nav-indicator"></div>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Settings -->
+    <div class="nav-section">
+      <div class="nav-section-title">Settings</div>
+      <ul class="nav-menu">
+        <li class="nav-item dropdown-menu-item">
+          <a href="#" class="nav-link-modern dropdown-toggle #{'active' if request.path.include?('/admin/settings') || request.path.include?('/admin/audit_logs')}" data-bs-toggle="collapse" data-bs-target="#settingsSubmenu">
+            <div class="nav-icon-modern">
+              <div class="icon-bg gradient-gray"><i class="bi bi-gear-fill"></i></div>
+            </div>
+            <span class="nav-text">Settings</span>
+            <span class="dropdown-arrow ms-auto"><i class="bi bi-chevron-down"></i></span>
+          </a>
+          <div class="submenu collapse <%= 'show' if request.path.include?('/admin/settings') || request.path.include?('/admin/audit_logs') %>" id="settingsSubmenu">
+            <ul class="submenu-list">
+              <li><%= link_to admin_settings_general_path, class: "submenu-link #{'active' if request.path.include?('/admin/settings/general')}" do %><span class="submenu-bullet">&bull;</span><span>General</span><% end %></li>
+              <li><%= link_to admin_settings_payment_gateway_path, class: "submenu-link #{'active' if request.path.include?('payment_gateway')}" do %><span class="submenu-bullet">&bull;</span><span>Payment Gateway</span><% end %></li>
+              <li><%= link_to admin_settings_attendance_rules_path, class: "submenu-link #{'active' if request.path.include?('attendance_rules')}" do %><span class="submenu-bullet">&bull;</span><span>Attendance Rules</span><% end %></li>
+              <li><%= link_to admin_settings_referral_rules_path, class: "submenu-link #{'active' if request.path.include?('referral_rules')}" do %><span class="submenu-bullet">&bull;</span><span>Referral Rules</span><% end %></li>
+              <li><%= link_to admin_audit_logs_path, class: "submenu-link #{'active' if request.path.include?('/admin/audit_logs')}" do %><span class="submenu-bullet">&bull;</span><span>Audit Logs</span><% end %></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <!-- Logout Section -->
+  <div class="sidebar-footer">
+    <%= link_to destroy_user_session_path, class: "logout-btn-modern", data: { turbo_method: :delete } do %>
+      <div class="nav-icon-modern">
+        <div class="icon-bg gradient-gray">
+          <i class="bi bi-box-arrow-right"></i>
+        </div>
+      </div>
+      <span class="nav-text">Logout</span>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% page_title "Referral History" %>
+<div class="page-header"><h1><i class="bi bi-share me-2"></i>Referral History - <%= @member.full_name %></h1><%= link_to "Back", admin_member_path(@member), class: "btn btn-light" %></div>
+<div class="row">
+  <div class="col-md-6"><div class="card"><div class="card-header">Given</div><div class="card-body p-0"><table class="table mb-0"><thead><tr><th>Ref #</th><th>Client</th><th>Value</th><th>Status</th></tr></thead><tbody>
+    <% @referrals_given.each do |r| %><tr><td><%= r.referral_number %></td><td><%= r.client_name %></td><td><%= inr(r.referral_value) %></td><td><%= workflow_badge(r.workflow_status) %></td></tr><% end %>
+  </tbody></table></div></div></div>
+  <div class="col-md-6"><div class="card"><div class="card-header">Received</div><div class="card-body p-0"><table class="table mb-0"><thead><tr><th>Ref #</th><th>Client</th><th>Value</th><th>Status</th></tr></thead><tbody>
+    <% @referrals_received.each do |r| %><tr><td><%= r.referral_number %></td><td><%= r.client_name %></td><td><%= inr(r.referral_value) %></td><td><%= workflow_badge(r.workflow_status) %></td></tr><% end %>
+  </tbody></table></div></div></div>
+</div>

@@ -1,0 +1,34 @@
+<%= form_with model: [:admin, @office_darshan], local: true do |form| %>
+  <% if @office_darshan.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@office_darshan.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @office_darshan.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :host_member_id, "Host Member", class: "form-label" %>
+      <%= form.collection_select :host_member_id, Member.all, :id, :full_name, { include_blank: "Select Host Member" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :visit_date, "Visit Date", class: "form-label" %>
+      <%= form.date_field :visit_date, class: "form-control" %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :purpose, "Purpose", class: "form-label" %>
+      <%= form.text_area :purpose, class: "form-control", rows: 3 %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :feedback, "Feedback", class: "form-label" %>
+      <%= form.text_area :feedback, class: "form-control", rows: 3 %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :status, "Status", class: "form-label" %>
+      <%= form.select :status, ["scheduled", "completed", "cancelled"], { include_blank: "Select" }, class: "form-select" %>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_office_darshans_path, class: "btn btn-light" %>
+  </div>
+<% end %>

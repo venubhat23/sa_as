@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  url: postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd
+
+test:
+  <<: *default
+  url: <%= ENV.fetch("DATABASE_URL_TEST", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>
+
+production:
+  <<: *default
+  url: <%= ENV.fetch("DATABASE_URL", "postgresql://markettincer_dbssdd_user:V2j1emW4JjaX1aeMy123cg1X4ExKLzXw@dpg-d8ne3n7lk1mc739l52eg-a.oregon-postgres.render.com/markettincer_dbssdd") %>

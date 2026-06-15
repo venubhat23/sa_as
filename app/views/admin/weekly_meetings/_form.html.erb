@@ -1,0 +1,13 @@
+<%= form_with model: [:admin, @weekly_meeting], local: true do |form| %>
+  <% if @weekly_meeting.errors.any? %><div class="alert alert-danger"><ul class="mb-0"><% @weekly_meeting.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul></div><% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3"><%= form.label :chapter_id, "Chapter", class: "form-label" %><%= form.collection_select :chapter_id, Chapter.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-3 mb-3"><%= form.label :meeting_date, class: "form-label" %><%= form.date_field :meeting_date, class: "form-control" %></div>
+    <div class="col-md-3 mb-3"><%= form.label :meeting_type, class: "form-label" %><%= form.select :meeting_type, ["Regular", "Special", "Leadership", "Training"], { include_blank: "Select" }, class: "form-select" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :venue, class: "form-label" %><%= form.text_field :venue, class: "form-control" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :status, class: "form-label" %><%= form.select :status, %w[scheduled completed cancelled], {}, class: "form-select" %></div>
+    <div class="col-md-12 mb-3"><%= form.label :agenda, class: "form-label" %><%= form.text_area :agenda, rows: 3, class: "form-control" %></div>
+    <div class="col-md-12 mb-3"><%= form.label :notes, class: "form-label" %><%= form.text_area :notes, rows: 2, class: "form-control" %></div>
+  </div>
+  <div class="mt-3"><%= form.submit "Save", class: "btn btn-primary" %> <%= link_to "Cancel", admin_weekly_meetings_path, class: "btn btn-light" %></div>
+<% end %>

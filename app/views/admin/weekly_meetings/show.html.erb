@@ -1,0 +1,82 @@
+<% page_title "Meeting Details" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Meeting - <%= @weekly_meeting.meeting_date %> <%= status_badge(@weekly_meeting.status) %></h2>
+    <p class="text-muted mb-0">Weekly Meeting Details</p>
+  </div>
+  <div class="d-flex gap-2">
+    <%= link_to edit_admin_weekly_meeting_path(@weekly_meeting), class: "btn btn-primary" do %>
+      <i class="bi bi-pencil me-1"></i>Edit
+    <% end %>
+    <%= link_to admin_weekly_meetings_path, class: "btn btn-outline-secondary" do %>
+      <i class="bi bi-arrow-left me-1"></i>Back
+    <% end %>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Meeting Info</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3 mb-2"><div class="text-muted small">Chapter</div><div class="fw-medium"><%= @weekly_meeting.chapter&.name || "—" %></div></div>
+      <div class="col-md-3 mb-2"><div class="text-muted small">Type</div><div class="fw-medium"><%= display_attr(@weekly_meeting, :meeting_type) %></div></div>
+      <div class="col-md-3 mb-2"><div class="text-muted small">Venue</div><div class="fw-medium"><%= display_attr(@weekly_meeting, :venue) %></div></div>
+      <div class="col-md-12 mb-2"><div class="text-muted small">Agenda</div><div class="fw-medium"><%= display_attr(@weekly_meeting, :agenda) %></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-transparent border-0 d-flex justify-content-between">
+        <h5 class="mb-0">Member Attendance</h5>
+      </div>
+      <div class="card-body">
+        <%= form_with url: admin_weekly_meeting_meeting_attendances_path(@weekly_meeting), method: :post, local: true do |f| %>
+          <div class="d-flex gap-2 mb-3">
+            <%= f.fields_for :meeting_attendance do |af| %>
+              <%= af.collection_select :member_id, Member.all, :id, :full_name, { include_blank: "Select Member" }, class: "form-select select2" %>
+              <%= af.select :attendance_status, MeetingAttendance.attendance_statuses.keys, {}, class: "form-select" %>
+            <% end %>
+            <%= f.submit "Add", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+        <table class="table table-sm mb-0">
+          <thead><tr><th>Member</th><th>Status</th></tr></thead>
+          <tbody>
+            <% @attendances.each do |a| %><tr><td><%= a.member&.full_name %></td><td><%= status_badge(a.attendance_status) %></td></tr><% end %>
+            <% if @attendances.empty? %><tr><td colspan="2" class="text-muted">No attendance recorded.</td></tr><% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-transparent border-0">
+        <h5 class="mb-0">Guest Attendance</h5>
+      </div>
+      <div class="card-body">
+        <%= form_with url: admin_weekly_meeting_guest_attendances_path(@weekly_meeting), method: :post, local: true do |f| %>
+          <div class="d-flex gap-2 mb-3">
+            <%= f.fields_for :guest_attendance do |af| %>
+              <%= af.collection_select :guest_id, Guest.all, :id, :name, { include_blank: "Select Guest" }, class: "form-select select2" %>
+            <% end %>
+            <%= f.submit "Add", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+        <table class="table table-sm mb-0">
+          <thead><tr><th>Guest</th></tr></thead>
+          <tbody>
+            <% @guest_attendances.each do |a| %><tr><td><%= a.guest&.name %></td></tr><% end %>
+            <% if @guest_attendances.empty? %><tr><td class="text-muted">No guest attendance.</td></tr><% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

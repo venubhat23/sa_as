@@ -1,0 +1,18 @@
+<%= form_with model: [:admin, @guest], local: true do |form| %>
+  <% if @guest.errors.any? %>
+    <div class="alert alert-danger"><ul class="mb-0"><% @guest.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul></div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3"><%= form.label :name, class: "form-label" %><%= form.text_field :name, class: "form-control" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :phone, class: "form-label" %><%= form.text_field :phone, class: "form-control" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :email, class: "form-label" %><%= form.email_field :email, class: "form-control" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :company_name, class: "form-label" %><%= form.text_field :company_name, class: "form-control" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :business_category_id, "Business Category", class: "form-label" %><%= form.collection_select :business_category_id, BusinessCategory.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :invited_by_member_id, "Invited By", class: "form-label" %><%= form.collection_select :invited_by_member_id, Member.all, :id, :full_name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :chapter_id, "Chapter", class: "form-label" %><%= form.collection_select :chapter_id, Chapter.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :lifecycle_status, "Lifecycle Stage", class: "form-label" %><%= form.select :lifecycle_status, Guest.lifecycle_statuses.keys, { include_blank: false }, class: "form-select" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :visit_date, class: "form-label" %><%= form.date_field :visit_date, class: "form-control" %></div>
+    <div class="col-md-12 mb-3"><%= form.label :notes, class: "form-label" %><%= form.text_area :notes, rows: 3, class: "form-control" %></div>
+  </div>
+  <div class="mt-3"><%= form.submit "Save", class: "btn btn-primary" %> <%= link_to "Cancel", admin_guests_path, class: "btn btn-light" %></div>
+<% end %>

@@ -1,0 +1,15 @@
+<%= form_with model: [:admin, @referral], local: true do |form| %>
+  <% if @referral.errors.any? %><div class="alert alert-danger"><ul class="mb-0"><% @referral.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul></div><% end %>
+  <div class="row">
+    <div class="col-md-4 mb-3"><%= form.label :referral_number, "Referral #", class: "form-label" %><%= form.text_field :referral_number, class: "form-control" %></div>
+    <div class="col-md-4 mb-3"><%= form.label :referral_date, class: "form-label" %><%= form.date_field :referral_date, class: "form-control" %></div>
+    <div class="col-md-4 mb-3"><%= form.label :workflow_status, "Status", class: "form-label" %><%= form.select :workflow_status, Referral.workflow_statuses.keys, {}, class: "form-select" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :given_by_member_id, "Given By", class: "form-label" %><%= form.collection_select :given_by_member_id, Member.all, :id, :full_name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :given_to_member_id, "Given To", class: "form-label" %><%= form.collection_select :given_to_member_id, Member.all, :id, :full_name, { include_blank: "Select" }, class: "form-select select2" %></div>
+    <div class="col-md-6 mb-3"><%= form.label :client_name, class: "form-label" %><%= form.text_field :client_name, class: "form-control" %></div>
+    <div class="col-md-3 mb-3"><%= form.label :client_phone, class: "form-label" %><%= form.text_field :client_phone, class: "form-control" %></div>
+    <div class="col-md-3 mb-3"><%= form.label :referral_value, "Value", class: "form-label" %><%= form.number_field :referral_value, step: :any, class: "form-control" %></div>
+    <div class="col-md-12 mb-3"><%= form.label :notes, class: "form-label" %><%= form.text_area :notes, rows: 3, class: "form-control" %></div>
+  </div>
+  <div class="mt-3"><%= form.submit "Save", class: "btn btn-primary" %> <%= link_to "Cancel", admin_referrals_path, class: "btn btn-light" %></div>
+<% end %>

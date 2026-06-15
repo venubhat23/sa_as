@@ -1,0 +1,11 @@
+<% page_title "Guest Conversion Report" %>
+<div class="page-header"><h1><i class="bi bi-person-check me-2"></i>Guest Conversion Report</h1><%= link_to "Back", admin_reports_path, class: "btn btn-light" %></div>
+<div class="row g-3 mb-3">
+  <div class="col-md-3"><div class="stat-card bg-gradient-cyan"><div class="stat-value"><%= @total %></div><div class="stat-label">Total Guests</div></div></div>
+  <div class="col-md-3"><div class="stat-card bg-gradient-green"><div class="stat-value"><%= @converted %></div><div class="stat-label">Converted</div></div></div>
+  <div class="col-md-3"><div class="stat-card bg-gradient-amber"><div class="stat-value"><%= @total.zero? ? 0 : (@converted * 100.0 / @total).round(1) %>%</div><div class="stat-label">Conversion Rate</div></div></div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-6"><div class="card"><div class="card-header">By Stage</div><div class="card-body"><%= pie_chart @by_status, height: "260px" %></div></div></div>
+  <div class="col-lg-6"><div class="card"><div class="card-header">Trend</div><div class="card-body"><%= line_chart @trend, height: "260px" %></div></div></div>
+</div>

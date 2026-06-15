@@ -1,0 +1,7 @@
+<% page_title "Referral Report" %>
+<div class="page-header"><h1><i class="bi bi-share me-2"></i>Referral Report</h1><%= link_to "Back", admin_reports_path, class: "btn btn-light" %></div>
+<div class="stat-card bg-gradient-blue mb-3" style="max-width:300px;"><div class="stat-value"><%= inr(@total_value) %></div><div class="stat-label">Total Referral Value</div></div>
+<div class="row g-3">
+  <div class="col-lg-6"><div class="card"><div class="card-header">By Status</div><div class="card-body"><%= pie_chart @by_status, height: "260px" %></div></div></div>
+  <div class="col-lg-6"><div class="card"><div class="card-header">Trend</div><div class="card-body"><%= line_chart @trend, height: "260px" %></div></div></div>
+</div>

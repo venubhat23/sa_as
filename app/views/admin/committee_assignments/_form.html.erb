@@ -1,0 +1,38 @@
+<%= form_with model: [:admin, @committee_assignment], local: true do |form| %>
+  <% if @committee_assignment.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@committee_assignment.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @committee_assignment.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :member_id, "Member", class: "form-label" %>
+      <%= form.collection_select :member_id, Member.all, :id, :full_name, { include_blank: "Select Member" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :committee_role_id, "Committee Role", class: "form-label" %>
+      <%= form.collection_select :committee_role_id, CommitteeRole.all, :id, :name, { include_blank: "Select Committee Role" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :chapter_id, "Chapter", class: "form-label" %>
+      <%= form.collection_select :chapter_id, Chapter.all, :id, :name, { include_blank: "Select Chapter" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :start_date, "Start Date", class: "form-label" %>
+      <%= form.date_field :start_date, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :end_date, "End Date", class: "form-label" %>
+      <%= form.date_field :end_date, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :status, "Status", class: "form-label" %>
+      <%= form.select :status, ["active", "inactive"], { include_blank: "Select" }, class: "form-select" %>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_committee_assignments_path, class: "btn btn-light" %>
+  </div>
+<% end %>

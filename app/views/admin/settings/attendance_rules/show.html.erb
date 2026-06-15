@@ -1,0 +1,29 @@
+<% page_title "Attendance Rule" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Attendance Rule</h2>
+    <p class="text-muted mb-0">Rule Details</p>
+  </div>
+  <div class="d-flex gap-2">
+    <%= link_to edit_admin_settings_attendance_rule_path(@attendance_rule), class: "btn btn-primary" do %>
+      <i class="bi bi-pencil me-1"></i>Edit
+    <% end %>
+    <%= link_to admin_settings_attendance_rules_path, class: "btn btn-outline-secondary" do %>
+      <i class="bi bi-arrow-left me-1"></i>Back
+    <% end %>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Details</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3"><div class="text-muted small">Rule Type</div><div class="fw-medium"><%= display_attr(@attendance_rule, :rule_type) %></div></div>
+      <div class="col-md-6 mb-3"><div class="text-muted small">Value</div><div class="fw-medium"><%= display_attr(@attendance_rule, :value) %></div></div>
+      <div class="col-md-12 mb-3"><div class="text-muted small">Description</div><div class="fw-medium"><%= display_attr(@attendance_rule, :description) %></div></div>
+    </div>
+  </div>
+</div>

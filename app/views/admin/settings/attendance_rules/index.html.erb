@@ -1,0 +1,71 @@
+<% page_title "Attendance Rules" %>
+
+<!-- Page Header -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">Attendance Rule Management</h2>
+    <p class="text-muted mb-0">Configure attendance rules here</p>
+  </div>
+  <div>
+    <%= link_to new_admin_settings_attendance_rule_path, class: "btn btn-primary" do %>
+      <i class="bi bi-plus-lg me-1"></i> Add New Rule
+    <% end %>
+  </div>
+</div>
+
+<!-- Table Card -->
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Attendance Rule List</h5>
+  </div>
+  <div class="card-body p-0">
+    <% if @attendance_rules.any? %>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="border-0 fw-semibold">Rule Type</th>
+              <th class="border-0 fw-semibold">Value</th>
+              <th class="border-0 fw-semibold">Description</th>
+              <th class="border-0 fw-semibold">Status</th>
+              <th class="border-0 fw-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @attendance_rules.each do |r| %>
+              <tr>
+                <td class="align-middle"><%= r.rule_type %></td>
+                <td class="align-middle"><%= r.value %></td>
+                <td class="align-middle"><%= truncate(r.description.to_s, length: 60) %></td>
+                <td class="align-middle"><%= status_badge(r.status) %></td>
+                <td class="align-middle">
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to admin_settings_attendance_rule_path(r), class: "dropdown-item" do %><i class="bi bi-eye me-2"></i>View<% end %></li>
+                      <li><%= link_to edit_admin_settings_attendance_rule_path(r), class: "dropdown-item" do %><i class="bi bi-pencil me-2"></i>Edit<% end %></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= link_to admin_settings_attendance_rule_path(r), data: { turbo_method: :delete, turbo_confirm: "Delete?" }, class: "dropdown-item text-danger" do %><i class="bi bi-trash me-2"></i>Delete<% end %></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer bg-transparent border-0">
+        <%= paginate @attendance_rules %>
+      </div>
+    <% else %>
+      <div class="text-center py-5">
+        <i class="bi bi-sliders fs-1 text-muted mb-3 d-block"></i>
+        <h5 class="text-muted mb-3">No Attendance Rules Found</h5>
+        <p class="text-muted mb-4">Get started by adding your first attendance rule.</p>
+        <%= link_to "Add Rule", new_admin_settings_attendance_rule_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

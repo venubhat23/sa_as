@@ -1,0 +1,6 @@
+<% page_title "Attendance Report" %>
+<div class="page-header"><h1><i class="bi bi-calendar-check me-2"></i>Attendance Report</h1><%= link_to "Back", admin_reports_path, class: "btn btn-light" %></div>
+<div class="row g-3">
+  <div class="col-lg-6"><div class="card"><div class="card-header">By Status</div><div class="card-body"><%= pie_chart @by_status, height: "260px" %></div></div></div>
+  <div class="col-lg-6"><div class="card"><div class="card-header">Trend</div><div class="card-body"><%= line_chart @attendance_trend, height: "260px" %></div></div></div>
+</div>

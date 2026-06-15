@@ -1,0 +1,30 @@
+<% page_title "SMS Template Details" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1"><%= @sms_template.name %></h2>
+    <p class="text-muted mb-0">SMS Template Details</p>
+  </div>
+  <div class="d-flex gap-2">
+    <%= link_to edit_admin_sms_template_path(@sms_template), class: "btn btn-primary" do %>
+      <i class="bi bi-pencil me-1"></i>Edit
+    <% end %>
+    <%= link_to admin_sms_templates_path, class: "btn btn-outline-secondary" do %>
+      <i class="bi bi-arrow-left me-1"></i>Back
+    <% end %>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-header bg-transparent border-0">
+    <h5 class="mb-0">Details</h5>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6 mb-3"><div class="text-muted small">Name</div><div class="fw-medium"><%= display_attr(@sms_template, :name) %></div></div>
+      <div class="col-md-6 mb-3"><div class="text-muted small">Body</div><div class="fw-medium"><%= display_attr(@sms_template, :body) %></div></div>
+      <div class="col-md-6 mb-3"><div class="text-muted small">Template Type</div><div class="fw-medium"><%= display_attr(@sms_template, :template_type) %></div></div>
+      <div class="col-md-6 mb-3"><div class="text-muted small">Status</div><div class="fw-medium"><%= display_attr(@sms_template, :status) %></div></div>
+    </div>
+  </div>
+</div>

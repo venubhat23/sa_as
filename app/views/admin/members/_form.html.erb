@@ -1,0 +1,69 @@
+<%= form_with model: [:admin, @member], local: true do |form| %>
+  <% if @member.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@member.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @member.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+
+  <div class="form-section">
+    <div class="form-section-title"><i class="bi bi-person me-1"></i>Basic Information</div>
+    <div class="row">
+      <div class="col-md-4 mb-3"><%= form.label :first_name, "First Name", class: "form-label" %><%= form.text_field :first_name, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :last_name, "Last Name", class: "form-label" %><%= form.text_field :last_name, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :membership_number, "Membership #", class: "form-label" %><%= form.text_field :membership_number, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :phone, class: "form-label" %><%= form.text_field :phone, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :email, class: "form-label" %><%= form.email_field :email, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :dob, "Date of Birth", class: "form-label" %><%= form.date_field :dob, class: "form-control" %></div>
+      <div class="col-md-12 mb-3"><%= form.label :address, class: "form-label" %><%= form.text_area :address, rows: 2, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :city, class: "form-label" %><%= form.text_field :city, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :state, class: "form-label" %><%= form.text_field :state, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :pincode, class: "form-label" %><%= form.text_field :pincode, class: "form-control" %></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title"><i class="bi bi-briefcase me-1"></i>Business Information</div>
+    <div class="row">
+      <div class="col-md-6 mb-3"><%= form.label :company_name, class: "form-label" %><%= form.text_field :company_name, class: "form-control" %></div>
+      <div class="col-md-3 mb-3"><%= form.label :gst_number, "GST Number", class: "form-label" %><%= form.text_field :gst_number, class: "form-control" %></div>
+      <div class="col-md-3 mb-3"><%= form.label :pan_number, "PAN Number", class: "form-label" %><%= form.text_field :pan_number, class: "form-control" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :business_category_id, "Business Category", class: "form-label" %><%= form.collection_select :business_category_id, BusinessCategory.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :business_specialty_id, "Specialty", class: "form-label" %><%= form.collection_select :business_specialty_id, BusinessSpecialty.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :website, class: "form-label" %><%= form.text_field :website, class: "form-control" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :linkedin_url, "LinkedIn URL", class: "form-label" %><%= form.text_field :linkedin_url, class: "form-control" %></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title"><i class="bi bi-card-checklist me-1"></i>Membership Information</div>
+    <div class="row">
+      <div class="col-md-4 mb-3"><%= form.label :forum_id, "Forum", class: "form-label" %><%= form.collection_select :forum_id, Forum.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :chapter_id, "Chapter", class: "form-label" %><%= form.collection_select :chapter_id, Chapter.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :membership_plan_id, "Plan", class: "form-label" %><%= form.collection_select :membership_plan_id, MembershipPlan.all, :id, :name, { include_blank: "Select" }, class: "form-select select2" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :joining_date, class: "form-label" %><%= form.date_field :joining_date, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :renewal_date, class: "form-label" %><%= form.date_field :renewal_date, class: "form-control" %></div>
+      <div class="col-md-4 mb-3"><%= form.label :membership_status, "Status", class: "form-label" %><%= form.select :membership_status, Member.membership_statuses.keys, { include_blank: false }, class: "form-select" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :user_id, "Linked User Account", class: "form-label" %><%= form.collection_select :user_id, User.all, :id, :display_name, { include_blank: "None" }, class: "form-select select2" %></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-title"><i class="bi bi-file-earmark-text me-1"></i>KYC Documents</div>
+    <div class="row">
+      <div class="col-md-6 mb-3"><%= form.label :pan_document, "PAN Document URL", class: "form-label" %><%= form.text_field :pan_document, class: "form-control" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :gst_document, "GST Document URL", class: "form-label" %><%= form.text_field :gst_document, class: "form-control" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :aadhar_document, "Aadhar Document URL", class: "form-label" %><%= form.text_field :aadhar_document, class: "form-control" %></div>
+      <div class="col-md-6 mb-3"><%= form.label :business_registration_document, "Business Reg. Document URL", class: "form-label" %><%= form.text_field :business_registration_document, class: "form-control" %></div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= form.submit "Save Member", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_members_path, class: "btn btn-light" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('turbo:load', function() { if (window.jQuery && $.fn.select2) $('.select2').select2({ theme: 'bootstrap-5', width: '100%' }); });
+</script>

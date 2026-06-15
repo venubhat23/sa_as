@@ -1,0 +1,46 @@
+<%= form_with model: [:admin, @thank_you_slip], local: true do |form| %>
+  <% if @thank_you_slip.errors.any? %>
+    <div class="alert alert-danger">
+      <strong><%= pluralize(@thank_you_slip.errors.count, "error") %> prevented saving:</strong>
+      <ul class="mb-0"><% @thank_you_slip.errors.full_messages.each do |m| %><li><%= m %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= form.label :referral_id, "Referral", class: "form-label" %>
+      <%= form.collection_select :referral_id, Referral.all, :id, :referral_number, { include_blank: "Select Referral" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :business_value, "Business Value", class: "form-label" %>
+      <%= form.number_field :business_value, step: :any, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :invoice_number, "Invoice Number", class: "form-label" %>
+      <%= form.text_field :invoice_number, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :client_name, "Client Name", class: "form-label" %>
+      <%= form.text_field :client_name, class: "form-control" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :received_by_member_id, "Received By", class: "form-label" %>
+      <%= form.collection_select :received_by_member_id, Member.all, :id, :full_name, { include_blank: "Select Received By" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :thanked_to_member_id, "Thanked To", class: "form-label" %>
+      <%= form.collection_select :thanked_to_member_id, Member.all, :id, :full_name, { include_blank: "Select Thanked To" }, class: "form-select select2" %>
+    </div>
+    <div class="col-md-6 mb-3">
+      <%= form.label :date, "Date", class: "form-label" %>
+      <%= form.date_field :date, class: "form-control" %>
+    </div>
+    <div class="col-md-12 mb-3">
+      <%= form.label :notes, "Notes", class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control", rows: 3 %>
+    </div>
+  </div>
+  <div class="mt-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_thank_you_slips_path, class: "btn btn-light" %>
+  </div>
+<% end %>
