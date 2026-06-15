@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def page_title(title)
-    content_for(:title) { "#{title} | Samarka Association" }
+    content_for(:title) { "#{title} | InterConnect" }
     title
   end
 

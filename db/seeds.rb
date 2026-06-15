@@ -1,4 +1,4 @@
-puts "Seeding Samarka Association..."
+puts "Seeding InterConnect..."
 
 # --- Roles ---
 role_data = [
@@ -76,8 +76,8 @@ MembershipPlan.find_or_create_by!(name: "Semi-Annual") { |p| p.duration_months =
 puts "  Membership plans: #{MembershipPlan.count}"
 
 # --- Forum & Chapter ---
-forum = Forum.find_or_create_by!(name: "Samarka Business Forum") { |f| f.code = "SBF"; f.description = "Primary business networking forum"; f.status = "active" }
-Chapter.find_or_create_by!(name: "Samarka Main Chapter") { |c| c.code = "SMC"; c.forum_id = forum.id; c.description = "Main chapter"; c.status = "active" }
+forum = Forum.find_or_create_by!(name: "InterConnect Business Forum") { |f| f.code = "ICF"; f.description = "Primary business networking forum"; f.status = "active" }
+Chapter.find_or_create_by!(name: "InterConnect Main Chapter") { |c| c.code = "ICM"; c.forum_id = forum.id; c.description = "Main chapter"; c.status = "active" }
 puts "  Forum & Chapter created"
 
 # --- Admin User ---

@@ -8,28 +8,29 @@
 html, body {
   height: 100%;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #0f0c29;
+  background: #050a18;
   overflow: hidden;
 }
 
-/* Animated deep networking gradient */
+/* Rich social-network dark gradient */
 .simple-login-wrapper::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.45) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.5) 0%, transparent 55%),
-    radial-gradient(ellipse at 60% 80%, rgba(67, 233, 123, 0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 10% 10%, rgba(0, 198, 255, 0.3) 0%, transparent 45%),
-    linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-  animation: bgPulse 12s ease-in-out infinite alternate;
+    radial-gradient(ellipse at 15% 40%, rgba(102, 126, 234, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(240, 147, 251, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(67, 233, 123, 0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 5%  85%, rgba(250, 112, 154, 0.35) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(79, 172, 254, 0.2) 0%, transparent 60%),
+    linear-gradient(135deg, #050a18 0%, #0d1b3e 40%, #1a0a2e 70%, #050a18 100%);
+  animation: bgPulse 14s ease-in-out infinite alternate;
   z-index: 0;
   pointer-events: none;
 }
 
 @keyframes bgPulse {
-  0%   { opacity: 0.85; }
+  0%   { opacity: 0.8; }
   50%  { opacity: 1; }
   100% { opacity: 0.85; }
 }
@@ -140,16 +141,17 @@ html, body {
 }
 
 .simple-logo {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  flex-shrink: 0;
   background:
     linear-gradient(145deg, #667eea 0%, #764ba2 50%, #4c63d2 100%);
   border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
+  font-size: 28px;
   color: white;
   box-shadow:
     0 12px 35px rgba(102, 126, 234, 0.35),
@@ -218,9 +220,21 @@ html, body {
   50% { background-position: 100% 50%; }
 }
 
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.brand-wordmark {
+  text-align: left;
+}
+
 .simple-subtitle {
   color: #718096;
-  font-size: 15px;
+  font-size: 13px;
   margin-bottom: 0;
   font-weight: 400;
   line-height: 1.4;
