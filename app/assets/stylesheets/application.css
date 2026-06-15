@@ -231,3 +231,171 @@ body {
   margin-bottom: 1rem;
   display: block;
 }
+
+/* ── Dashboard ─────────────────────────────────────────────── */
+
+/* Welcome banner */
+.dashboard-welcome {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 60%, #f093fb 100%);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(102,126,234,0.3);
+}
+.welcome-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.welcome-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.welcome-sub {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.welcome-badge {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+}
+
+/* KPI cards */
+.kpi-card {
+  border-radius: 18px;
+  padding: 1.4rem 1.2rem 1rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+}
+.kpi-icon {
+  font-size: 1.6rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+.kpi-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.kpi-label {
+  font-size: 0.75rem;
+  opacity: 0.88;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.kpi-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 0 0 18px 18px;
+}
+.kpi-blue   { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.kpi-green  { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+.kpi-cyan   { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
+.kpi-orange { background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%); }
+.kpi-pink   { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.kpi-amber  { background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%); }
+
+/* Dashboard cards (charts & tables) */
+.dash-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+.dash-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+.dash-card-warning {
+  border-top: 3px solid #ffc107;
+}
+.dash-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid #f0f4f8;
+}
+.dash-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2d3748;
+}
+.dash-card-body {
+  padding: 1.25rem;
+}
+.dash-view-all {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #667eea;
+  text-decoration: none;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(102,126,234,0.08);
+  transition: background 0.2s;
+}
+.dash-view-all:hover {
+  background: rgba(102,126,234,0.18);
+  color: #5a6fd8;
+}
+
+/* Member avatar row */
+.member-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.member-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.fw-600 { font-weight: 600; }
+.fw-500 { font-weight: 500; }
+
+/* Meeting date badge */
+.meeting-date-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(102,126,234,0.1);
+  color: #667eea;
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+}
+
+/* Renewal dot indicator */
+.renewal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffc107;
+  flex-shrink: 0;
+}

@@ -164,9 +164,11 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><span class="dropdown-item-text small text-muted"><%= current_user.role&.name || "No Role" %></span></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><%= link_to destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } do %>
-                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                  <% end %></li>
+                  <li>
+                    <%= button_to destroy_user_session_path, method: :delete, class: "dropdown-item border-0 bg-transparent w-100 text-start px-3 py-1" do %>
+                      <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    <% end %>
+                  </li>
                 </ul>
               </div>
             </div>
