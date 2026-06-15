@@ -299,6 +299,50 @@
   padding: 1rem 0.5rem 1rem 0.5rem !important;
 }
 
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1039;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.sidebar-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 767px) {
+  .modern-sidebar {
+    transform: translateX(-100%) !important;
+    width: 280px !important;
+    top: 60px !important;
+    height: calc(100vh - 60px) !important;
+    transition: transform 0.3s ease !important;
+  }
+  .modern-sidebar.show {
+    transform: translateX(0) !important;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.2) !important;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    margin-top: 60px !important;
+  }
+  .sidebar-overlay {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-sidebar {
+    width: 100vw !important;
+  }
+}
+
 /* Dropdown and Submenu Styles */
 .dropdown-arrow {
   transition: transform 0.3s ease !important;
@@ -383,6 +427,7 @@
 }
 </style>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 <div class="modern-sidebar" id="sidebar">
 
   <!-- Navigation Menu -->
@@ -748,7 +793,7 @@
 
   <!-- Logout Section -->
   <div class="sidebar-footer">
-    <%= link_to destroy_user_session_path, class: "logout-btn-modern", data: { turbo_method: :delete } do %>
+    <%= button_to destroy_user_session_path, method: :delete, class: "logout-btn-modern border-0 w-100" do %>
       <div class="nav-icon-modern">
         <div class="icon-bg gradient-gray">
           <i class="bi bi-box-arrow-right"></i>

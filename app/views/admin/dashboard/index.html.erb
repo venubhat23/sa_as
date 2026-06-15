@@ -13,8 +13,8 @@
   </div>
 </div>
 
-<!-- KPI Stat Cards -->
-<div class="row g-4 mb-4">
+<!-- KPI Stat Cards Row 1 -->
+<div class="row g-3 mb-3">
   <div class="col-6 col-md-4 col-xl-2">
     <div class="kpi-card kpi-blue">
       <div class="kpi-icon"><i class="bi bi-people-fill"></i></div>
@@ -65,12 +65,49 @@
   </div>
 </div>
 
-<!-- Charts Row -->
+<!-- KPI Stat Cards Row 2 -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="kpi-card kpi-purple">
+      <div class="kpi-icon"><i class="bi bi-wallet2"></i></div>
+      <div class="kpi-value"><%= inr(@total_revenue) %></div>
+      <div class="kpi-label">Total Revenue</div>
+      <div class="kpi-bar"></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card kpi-indigo">
+      <div class="kpi-icon"><i class="bi bi-trophy-fill"></i></div>
+      <div class="kpi-value"><%= @won_referrals %></div>
+      <div class="kpi-label">Won Referrals</div>
+      <div class="kpi-bar"></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card kpi-teal">
+      <div class="kpi-icon"><i class="bi bi-handshake-fill"></i></div>
+      <div class="kpi-value"><%= @one_to_ones_this_month %></div>
+      <div class="kpi-label">1-to-1 This Month</div>
+      <div class="kpi-bar"></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="kpi-card kpi-rose">
+      <div class="kpi-icon"><i class="bi bi-funnel-fill"></i></div>
+      <div class="kpi-value"><%= @active_referrals %></div>
+      <div class="kpi-label">Active Pipeline</div>
+      <div class="kpi-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Row 1 -->
 <div class="row g-4 mb-4">
   <div class="col-lg-6">
     <div class="dash-card">
       <div class="dash-card-header">
         <div class="dash-card-title"><i class="bi bi-graph-up-arrow me-2 text-primary"></i>Member Growth</div>
+        <span class="text-muted small">Last 6 months</span>
       </div>
       <div class="dash-card-body">
         <%= line_chart @member_growth, colors: ["#667eea"], height: "240px", library: { plugins: { legend: { display: false } } } %>
@@ -81,19 +118,22 @@
     <div class="dash-card">
       <div class="dash-card-header">
         <div class="dash-card-title"><i class="bi bi-bar-chart-fill me-2 text-success"></i>Attendance Breakdown</div>
+        <span class="text-muted small">By status</span>
       </div>
       <div class="dash-card-body">
-        <%= column_chart @attendance_chart, colors: ["#11998e"], height: "240px", library: { plugins: { legend: { display: false } } } %>
+        <%= column_chart @attendance_chart, colors: ["#11998e", "#f7b731", "#fc5c65", "#45aaf2", "#a55eea"], height: "240px", library: { plugins: { legend: { display: false } } } %>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Charts Row 2 -->
 <div class="row g-4 mb-4">
   <div class="col-lg-6">
     <div class="dash-card">
       <div class="dash-card-header">
         <div class="dash-card-title"><i class="bi bi-arrow-up-right-circle-fill me-2 text-warning"></i>Referral Trend</div>
+        <span class="text-muted small">Last 6 months</span>
       </div>
       <div class="dash-card-body">
         <%= line_chart @referral_trend, colors: ["#ff8a00"], height: "240px", library: { plugins: { legend: { display: false } } } %>
@@ -104,6 +144,7 @@
     <div class="dash-card">
       <div class="dash-card-header">
         <div class="dash-card-title"><i class="bi bi-currency-rupee me-2 text-info"></i>Business Generated</div>
+        <span class="text-muted small">Last 6 months</span>
       </div>
       <div class="dash-card-body">
         <%= column_chart @business_generated, colors: ["#0072ff"], height: "240px", library: { plugins: { legend: { display: false } } } %>
@@ -112,8 +153,60 @@
   </div>
 </div>
 
-<!-- Bottom Tables Row -->
-<div class="row g-4">
+<!-- Charts Row 3 -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-cash-stack me-2 text-success"></i>Revenue Trend</div>
+        <span class="text-muted small">Last 6 months</span>
+      </div>
+      <div class="dash-card-body">
+        <%= column_chart @revenue_trend, colors: ["#20bf6b"], height: "240px", library: { plugins: { legend: { display: false } } } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-pie-chart-fill me-2 text-warning"></i>Referral Pipeline Status</div>
+        <span class="text-muted small">All time distribution</span>
+      </div>
+      <div class="dash-card-body">
+        <%= pie_chart @referral_status_chart, colors: ["#a0a0a0", "#45aaf2", "#4b7bec", "#f7b731", "#20bf6b", "#fc5c65"], height: "240px", donut: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Row 4 -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-grid-fill me-2 text-primary"></i>Members by Business Category</div>
+        <span class="text-muted small">Top 6 categories</span>
+      </div>
+      <div class="dash-card-body">
+        <%= bar_chart @top_categories, colors: ["#667eea"], height: "240px", library: { plugins: { legend: { display: false } }, indexAxis: "y" } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-handshake me-2 text-info"></i>1-to-1 Meeting Trend</div>
+        <span class="text-muted small">Last 6 months</span>
+      </div>
+      <div class="dash-card-body">
+        <%= line_chart @one_to_one_trend, colors: ["#0fb9b1"], height: "240px", library: { plugins: { legend: { display: false } } } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tables Row 1 -->
+<div class="row g-4 mb-4">
   <div class="col-lg-5">
     <div class="dash-card h-100">
       <div class="dash-card-header">
@@ -192,6 +285,80 @@
           <% end %>
           <% if @pending_renewal_members.empty? %>
             <tr><td class="text-muted p-3 text-center"><i class="bi bi-check-circle text-success me-1"></i>All clear!</td></tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tables Row 2 -->
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="dash-card h-100">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-share-fill me-2 text-warning"></i>Recent Referrals</div>
+        <%= link_to "View All", admin_referrals_path, class: "dash-view-all" %>
+      </div>
+      <div class="dash-card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="small text-muted fw-600">Client</th>
+              <th class="small text-muted fw-600">Given By</th>
+              <th class="small text-muted fw-600">To</th>
+              <th class="small text-muted fw-600 text-end">Value</th>
+              <th class="small text-muted fw-600 text-end">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @recent_referrals.each do |r| %>
+            <tr>
+              <td class="fw-500"><%= r.client_name.presence || "—" %></td>
+              <td class="text-muted small"><%= r.given_by_member&.full_name || "—" %></td>
+              <td class="text-muted small"><%= r.given_to_member&.full_name || "—" %></td>
+              <td class="text-end small"><%= r.referral_value.present? ? inr(r.referral_value) : "—" %></td>
+              <td class="text-end"><%= workflow_badge(r.workflow_status) %></td>
+            </tr>
+          <% end %>
+          <% if @recent_referrals.empty? %>
+            <tr><td colspan="5" class="text-muted p-3 text-center"><i class="bi bi-inbox me-1"></i>No referrals yet.</td></tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="dash-card h-100">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-award-fill me-2 text-success"></i>Top Business Generators</div>
+      </div>
+      <div class="dash-card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th class="small text-muted fw-600">Member</th>
+              <th class="small text-muted fw-600 text-end">Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @top_business_members.each_with_index do |m, i| %>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-primary rounded-pill" style="min-width:24px"><%= i + 1 %></span>
+                  <%= link_to m.full_name, admin_member_path(m), class: "text-dark text-decoration-none fw-500" %>
+                  <span class="text-muted small"><%= m.company_name %></span>
+                </div>
+              </td>
+              <td class="text-end fw-600 text-success"><%= inr(m.total_business) %></td>
+            </tr>
+          <% end %>
+          <% if @top_business_members.empty? %>
+            <tr><td colspan="2" class="text-muted p-3 text-center"><i class="bi bi-inbox me-1"></i>No business data yet.</td></tr>
           <% end %>
           </tbody>
         </table>

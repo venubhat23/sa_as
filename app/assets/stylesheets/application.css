@@ -314,6 +314,10 @@ body {
 .kpi-orange { background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%); }
 .kpi-pink   { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
 .kpi-amber  { background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%); }
+.kpi-purple { background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); }
+.kpi-indigo { background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%); }
+.kpi-teal   { background: linear-gradient(135deg, #0fb9b1 0%, #0a8f89 100%); }
+.kpi-rose   { background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%); }
 
 /* Dashboard cards (charts & tables) */
 .dash-card {
