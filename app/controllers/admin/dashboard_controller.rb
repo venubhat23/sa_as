@@ -26,7 +26,7 @@ module Admin
       @referral_status_chart = Referral.group(:workflow_status).count.transform_keys { |k|
         Referral.workflow_statuses.key(k)&.gsub("_", " ")&.titleize || k.to_s
       }
-      @top_categories = BusinessCategory.joins(:members).group("business_categories.name").order("COUNT(*) DESC").limit(6).count
+      @top_categories = BusinessCategory.joins(:members).group("business_categories.name").order(Arel.sql("COUNT(*) DESC")).limit(6).count
       @one_to_one_trend = OneToOne.group_by_month(:meeting_date, last: 6, format: "%b").count
 
       # Tables - existing
